@@ -53,13 +53,10 @@ FUSE_MOUNT_POINT="/home/stolet/COM_DIR/FUSE_EXT4_FS/"
 COMMON_FOLDER="/home/stolet/fuse-3.7.0/Results/$TYPE-FUSE-EXT4-Results"
 
 
-#work_load_types=( sq rd cr preall ) 	  # Sequential, random, create and delete workloads
-#work_load_ops=( re wr )   	          # write and read workloads
-#io_sizes=( 4KB 32KB 128KB 1048KB)        # I/O sizes
-work_load_types=( sq ) 	  # Sequential and random workloads
-work_load_ops=( re )   	  # write and read workloads
-io_sizes=( 4KB ) # I/O sizes
-threads=( 1 )		  # No. of threads
+work_load_types=( sq rd cr preall ) 	  # Sequential, random, create and delete workloads
+work_load_ops=( re wr )   	          # write and read workloads
+io_sizes=( 4KB 32KB 128KB 1048KB)        # I/O sizes
+threads=( 1 32 )		  # No. of threads
 count=1 			  # No. of times you are repeating the experiment
 sleeptime=1
 
