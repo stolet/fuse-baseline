@@ -1,6 +1,26 @@
 libfuse
 =======
 
+Before you start
+----------------
+1. Clone and build this repo and follow the fuse setup instructions
+2. Download filebench 1.5-alpha3
+3. Inside the filebench directory modify the number of FILEBENCH_NFILESETENTRIES to 40000000
+   in ipc.h If this is not done, filebench will not be able to run large workloads.
+4. Modify the automate-defaut-fuse.sh, automade-no-fuse.sh, and automate-opts-fuse.sh so
+   that the hardcoded paths use the name of the user in your computer instead of "stolet"
+5. Modify the workload files so that they will use your username instead of "stolet"
+6. Modify the devices for SSD and HDD in the automate scripts so that they use the correct
+   name of the devices in you computer instead of /dev/sdc1 and /dev/sdd
+7. Create a directory called EXT4_FS and another called COM_DIR in your home folder.
+8. If you want to run the workloads on an SSD or an HDD modify the hardcoded TYPE accordingly
+   on each script
+9. To run the filebench workloads on plain ext4 run automate-no-fuse.sh.
+10.To run the filebench workloads on regular fuse run automate-default-fuse.sh
+11.To run the filebench workloads on the optimized fuse version from To Fuse or Not To Fuse run automate-opts-fuse.sh.
+12. Make sure to run make in the scripts folder.
+13. Compile stackfs_lowlevel.c in the examples folder.
+
 About
 -----
 
