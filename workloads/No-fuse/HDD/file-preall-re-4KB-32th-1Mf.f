@@ -1,5 +1,5 @@
 set mode quit timeout
-set $dir=/home/stolet/EXT4_FS
+set $dir=/home/puneet/EXT4_FS
 #combined I/O amount to 1M prealloc (0.3 M) files
 set $nfiles=1000000
 set $meandirwidth=1000
@@ -20,9 +20,9 @@ define process name=fileopen, instances=1
 create files
 #mounting and unmounting for better stable results
 system "sync"
-system "umount /home/stolet/EXT4_FS/"
-#change accordingly for HDD(sdb) and SSD(sdd)
-system "mount -t ext4 /dev/sdb /home/stolet/EXT4_FS"
+system "umount /home/puneet/EXT4_FS/"
+#change accordingly for HDD(sdc) and SSD(sdd)
+system "mount -t ext4 /dev/sdc /home/puneet/EXT4_FS"
 system "sync"
 system "echo 3 > /proc/sys/vm/drop_caches"
 system "echo started >> cpustats.txt"

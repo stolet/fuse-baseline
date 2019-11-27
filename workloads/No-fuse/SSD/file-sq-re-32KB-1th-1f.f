@@ -1,5 +1,5 @@
 set mode quit timeout
-set $dir=/home/stolet/EXT4_FS
+set $dir=/home/puneet/EXT4_FS
 set $nfiles=1
 set $meandirwidth=1
 set $nthreads=1
@@ -19,9 +19,9 @@ define process name=fileopen, instances=1
 create files
 #unmount and mount for better stability results
 system "sync"
-system "umount /home/stolet/EXT4_FS"
-#Change accordingly for HDD(sdb) and SSD(sdc1)
-system "mount -t ext4 /dev/sdc1 /home/stolet/EXT4_FS"
+system "umount /home/puneet/EXT4_FS"
+#Change accordingly for HDD(sdc) and SSD(sdb)
+system "mount -t ext4 /dev/sdb /home/puneet/EXT4_FS"
 system "sync"
 system "echo 3 > /proc/sys/vm/drop_caches"
 system "echo started >> cpustats.txt"

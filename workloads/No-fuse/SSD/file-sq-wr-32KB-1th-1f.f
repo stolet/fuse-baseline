@@ -1,5 +1,5 @@
 set mode quit timeout
-set $dir=/home/stolet/EXT4_FS
+set $dir=/home/puneet/EXT4_FS
 set $nthreads=1
 #Fix I/O amount to 60 G
 define file name=bigfile, path=$dir, size=60g

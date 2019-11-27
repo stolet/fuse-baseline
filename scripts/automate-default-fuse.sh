@@ -47,10 +47,10 @@ fi
 
 #HARDCODED
 TYPE="SSD"
-WORKLOAD_DIR="/home/stolet/fuse-3.7.0/workloads/default-fuse/$TYPE/"
-MOUNT_POINT="/home/stolet/COM_DIR/"
-FUSE_MOUNT_POINT="/home/stolet/COM_DIR/FUSE_EXT4_FS/"
-COMMON_FOLDER="/home/stolet/fuse-3.7.0/Results/$TYPE-FUSE-EXT4-Results"
+WORKLOAD_DIR="$HOME/fuse-3.7.0/workloads/default-fuse/$TYPE/"
+MOUNT_POINT="$HOME/COM_DIR/"
+FUSE_MOUNT_POINT="$HOME/COM_DIR/FUSE_EXT4_FS/"
+COMMON_FOLDER="$HOME/fuse-3.7.0/Results/$TYPE-FUSE-EXT4-Results"
 
 
 work_load_types=( sq rd cr preall ) 	  # Sequential, random, create and delete workloads

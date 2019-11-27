@@ -48,9 +48,9 @@ fi
 
 #HARDCODED
 TYPE="SSD"
-WORKLOAD_DIR="/home/stolet/fuse-3.7.0/workloads/No-fuse/$TYPE"
-MOUNT_POINT="/home/stolet/EXT4_FS/"
-COMMON_FOLDER="/home/stolet/fuse-3.7.0/Results/$TYPE-EXT4-Results"
+WORKLOAD_DIR="$HOME/fuse-3.7.0/workloads/No-fuse/$TYPE"
+MOUNT_POINT="$HOME/EXT4_FS/"
+COMMON_FOLDER="$HOME/fuse-3.7.0/Results/$TYPE-EXT4-Results"
 
 work_load_types=( sq rd cr preall )
 work_load_ops=( re wr )

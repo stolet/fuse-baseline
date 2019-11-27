@@ -1,5 +1,5 @@
 set mode quit timeout
-set $dir=/home/stolet/EXT4_FS
+set $dir=/home/puneet/EXT4_FS
 set $nfiles=200000
 set $meandirwidth=20
 set $nthreads=50
@@ -31,9 +31,9 @@ create files
 #unmount and mount for better stability results
 system "sync"
 
-system "umount /home/stolet/EXT4_FS"
-#change accordingly for HDD (sdb) and SSD(sdc1)
-system "mount -t ext4 /dev/sdc1 /home/stolet/EXT4_FS"
+system "umount /home/puneet/EXT4_FS"
+#change accordingly for HDD (sdc) and SSD(sdb)
+system "mount -t ext4 /dev/sdb /home/puneet/EXT4_FS"
 
 system "sync"
 system "echo 3 > /proc/sys/vm/drop_caches"
