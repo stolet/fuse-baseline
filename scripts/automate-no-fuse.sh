@@ -47,14 +47,14 @@ then
 fi
 
 #HARDCODED
-TYPE="SSD"
+TYPE="HDD"
 WORKLOAD_DIR="$HOME/fuse-3.7.0/workloads/No-fuse/$TYPE"
 MOUNT_POINT="$HOME/EXT4_FS/"
 COMMON_FOLDER="$HOME/fuse-3.7.0/Results/$TYPE-EXT4-Results"
 
 work_load_types=( sq rd cr preall )
 work_load_ops=( re wr )
-io_sizes=( 4KB 32KB 128KB 1048KB )  # I/O sizes
+io_sizes=( 4KB 32KB 128KB 1024KB )  # I/O sizes
 threads=( 1 32 )		    # No. of threads
 count=1 		            # No. of times you are repeating the experiment
 sleeptime=1
@@ -63,16 +63,16 @@ sleeptime=1
 rm -rf $COMMON_FOLDER/*
 
 : '
-/dev/sdc1 is the SSD
+/dev/sdb is the SSD
 '
 
 dev=""
 if [ $TYPE == "SSD" ]
 then
-    dev="sdc1"
+    dev="sdb"
 elif [ $TYPE == "HDD" ]
 then
-    dev="sdd"
+    dev="sdc"
 fi
 
 #iterate over W_L_T
@@ -123,7 +123,7 @@ do
 				files=( 1M ) #(SSD)
 			elif [ "$wlt" == "preall" -a "$wlo" == "de" ]
 			then
-				files=( 2M ) #(SSD)
+				files=( 4M ) #(SSD)
 			fi
 			for file in "${files[@]}"
 			do
@@ -141,8 +141,8 @@ do
 
                                                   if [ "$TYPE" == "HDD" ]
                                                 then
-                                                        mkfs.ext4 -F -E  lazy_itable_init=0,lazy_journal_init=0 -O ^uninit_bg /dev/sdb > /dev/null
-                                                        mount -t ext4 /dev/sdb $MOUNT_POINT
+                                                        mkfs.ext4 -F -E  lazy_itable_init=0,lazy_journal_init=0 -O ^uninit_bg /dev/sdc > /dev/null
+                                                        mount -t ext4 /dev/sdc $MOUNT_POINT
                                                 elif [ "$TYPE" == "SSD" ]
                                                 then
                                                         mkfs.ext4 -F -E  lazy_itable_init=0,lazy_journal_init=0 -O ^uninit_bg /dev/$dev > /dev/null

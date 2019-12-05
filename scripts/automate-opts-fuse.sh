@@ -46,7 +46,7 @@ then
 fi
 
 #HARDCODED
-TYPE="SSD"
+TYPE="HDD"
 WORKLOAD_DIR="$HOME/fuse-3.7.0/workloads/opts-fuse/$TYPE/"
 MOUNT_POINT="$HOME/COM_DIR/"
 FUSE_MOUNT_POINT="$HOME/COM_DIR/FUSE_EXT4_FS/"
@@ -54,7 +54,7 @@ COMMON_FOLDER="$HOME/fuse-3.7.0/Results/$TYPE-FUSE-OPTS-EXT4-Results"
 
 work_load_types=( sq rd cr preall )  # Sequential and random workloads
 work_load_ops=( re wr )	             # write and read workloads
-io_sizes=( 4KB 32KB 128KB 1048KB )   # I/O sizes
+io_sizes=( 4KB 32KB 128KB 1024KB )   # I/O sizes
 threads=( 1 32 )		     # No. of threads
 count=1			             # No. of times you are repeating the experiment
 sleeptime=1
@@ -71,10 +71,10 @@ useful
 dev=""
 if [ $TYPE == "SSD" ]
 then
-    dev="sdc1"
+    dev="sdb"
 elif [ $TYPE == "HDD" ]
 then
-    dev="sdd"
+    dev="sdc"
 fi
 
 #iterate over W_L_T
@@ -126,7 +126,7 @@ do
                         then
 				if [ "$TYPE" == "HDD" ]
 				then
-                                	files=( 2M )
+                                	files=( 4M )
 				elif [ "$TYPE" == "SSD" ]
 				then
 					files=( 4M )
@@ -149,12 +149,12 @@ do
                                                 #Change accordingly for HDD(sdb) and SSD(sdc1)
 						if [ "$TYPE" == "HDD" ]
 						then
-                                                	mkfs.ext4 -F -E  lazy_itable_init=0,lazy_journal_init=0 -O ^uninit_bg /dev/sdb > /dev/null
-                                                	mount -t ext4 /dev/sdb $MOUNT_POINT
+                                                	mkfs.ext4 -F -E  lazy_itable_init=0,lazy_journal_init=0 -O ^uninit_bg /dev/sdc > /dev/null
+                                                	mount -t ext4 /dev/sdc $MOUNT_POINT
 						elif [ "$TYPE" == "SSD" ]
 						then
-                                                	mkfs.ext4 -F -E  lazy_itable_init=0,lazy_journal_init=0 -O ^uninit_bg /dev/sdc1 > /dev/null
-                                                	mount -t ext4 /dev/sdc1 $MOUNT_POINT	
+                                                	mkfs.ext4 -F -E  lazy_itable_init=0,lazy_journal_init=0 -O ^uninit_bg /dev/sdb > /dev/null
+                                                	mount -t ext4 /dev/sdb $MOUNT_POINT	
 						fi
 
                                                 echo 0 > /proc/sys/kernel/randomize_va_space
