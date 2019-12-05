@@ -92,10 +92,9 @@ def get_avgs(path, regx_pattern):
     return pd.DataFrame(data)
 
 def calculate_overhead(baseline, comparison):
-    print("CALCULATING OVERHEAD")
     baseline = baseline
     comparison = comparison
-    overhead =  comparison / baseline
+    overhead = baseline / comparison
     overhead = 1 - overhead
     return overhead
 
@@ -109,14 +108,22 @@ def get_default_fuse_overhead(dataframe):
 
    #fuse_hdd["Overhead"] = calculate_overhead(ext4_hdd["Avg"], fuse_hdd["Avg"]) 
    #fuseopts_hdd["Overhead"] = calculate_overhead(ext4_hdd["Avg"], fuseopts_hdd["Avg"])
+   ext4_ssd["Overhead"] = 0 
    fuse_ssd["Overhead"] = calculate_overhead(ext4_ssd["Avg"], fuse_ssd["Avg"])
    fuseopts_ssd["Overhead"] = calculate_overhead(ext4_ssd["Avg"], fuseopts_ssd["Avg"])
-   print(fuse_ssd)
-   print(fuseopts_ssd)
+   
+   new_dataframe = ext4_ssd
+   new_dataframe = new_dataframe.append(fuse_ssd, ignore_index=True)
+   new_dataframe = new_dataframe.append(fuseopts_ssd, ignore_index=True)
+    
+   return new_dataframe
 
 if __name__ == '__main__':
     regx_pattern = "[0-9]*ops\/s"
     path = sys.argv[1]
     parsed_avgs = get_avgs(path, regx_pattern)
-    get_default_fuse_overhead(parsed_avgs) 
+    overheads = get_default_fuse_overhead(parsed_avgs) 
+    print(overheads.to_string())
+    #with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
+    #    print(overheads)
 
