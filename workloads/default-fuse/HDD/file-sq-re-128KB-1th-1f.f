@@ -1,5 +1,5 @@
 set mode quit timeout
-set $dir=$HOME/COM_DIR/FUSE_EXT4_FS/
+set $dir=/home/puneet/COM_DIR/FUSE_EXT4_FS/
 set $nfiles=1
 set $meandirwidth=1
 set $nthreads=1
@@ -18,22 +18,22 @@ define process name=fileopen, instances=1
 }
 
 #prealloc the file on EXT4 F/S (save the time)
-system "mkdir -p $HOME/COM_DIR/FUSE_EXT4_FS"
-system "mkdir -p $HOME/COM_DIR/EXT4_FS"
+system "mkdir -p /home/puneet/COM_DIR/FUSE_EXT4_FS/"
+system "mkdir -p /home/puneet/COM_DIR/EXT4_FS"
 
 create files
 
 #Move everything created under FUSE-EXT4 dir to EXT4
-system "mv $HOME/COM_DIR/FUSE_EXT4_FS/* $HOME/COM_DIR/EXT4_FS/"
+system "mv /home/puneet/COM_DIR/FUSE_EXT4_FS/* /home/puneet/COM_DIR/EXT4_FS/"
 
 #mounting and unmounting for better stable results
 system "sync"
-system "umount $HOME/COM_DIR/"
+system "umount /home/puneet/COM_DIR/"
 #Change accordingly for HDD(sdc) and SDD(sdd)
-system "mount -t ext4 /dev/sdc $HOME/COM_DIR/"
+system "mount -t ext4 /dev/sdc /home/puneet/COM_DIR/"
 
 #mount FUSE FS (default) on top of EXT4
-system "$HOME/fuse-3.7.0/example/stackfs_ll -s --statsdir=/tmp/ -r $HOME/COM_DIR/EXT4_FS/ $HOME/COM_DIR/FUSE_EXT4_FS/ > /dev/null &"
+system "/home/puneet/fuse-3.7.0/example/stackfs_ll -s --statsdir=/tmp/ -r /home/puneet/COM_DIR/EXT4_FS/ /home/puneet/COM_DIR/FUSE_EXT4_FS/ > /dev/null &"
 
 system "sync"
 system "echo 3 > /proc/sys/vm/drop_caches"
