@@ -91,9 +91,32 @@ def get_avgs(path, regx_pattern):
 
     return pd.DataFrame(data)
 
+def calculate_overhead(baseline, comparison):
+    print("CALCULATING OVERHEAD")
+    baseline = baseline
+    comparison = comparison
+    overhead =  comparison / baseline
+    overhead = 1 - overhead
+    return overhead
+
+def get_default_fuse_overhead(dataframe):
+   ext4_hdd = dataframe.loc[dataframe["Type"] == "HDD-EXT4-Results"].reset_index(drop=True) 
+   fuse_hdd = dataframe.loc[dataframe["Type"] == "HDD-FUSE-EXT4-Results"].reset_index(drop=True)
+   fuseopts_hdd = dataframe.loc[dataframe["Type"] == "HDD-FUSE-OPTS-EXT4-Results"].reset_index(drop=True)
+   ext4_ssd = dataframe.loc[dataframe["Type"] == "SSD-EXT4-Results"].reset_index(drop=True)
+   fuse_ssd = dataframe.loc[dataframe["Type"] == "SSD-FUSE-EXT4-Results"].reset_index(drop=True)
+   fuseopts_ssd = dataframe.loc[dataframe["Type"] == "SSD-FUSE-OPTS-EXT4-Results"].reset_index(drop=True)
+
+   #fuse_hdd["Overhead"] = calculate_overhead(ext4_hdd["Avg"], fuse_hdd["Avg"]) 
+   #fuseopts_hdd["Overhead"] = calculate_overhead(ext4_hdd["Avg"], fuseopts_hdd["Avg"])
+   fuse_ssd["Overhead"] = calculate_overhead(ext4_ssd["Avg"], fuse_ssd["Avg"])
+   fuseopts_ssd["Overhead"] = calculate_overhead(ext4_ssd["Avg"], fuseopts_ssd["Avg"])
+   print(fuse_ssd)
+   print(fuseopts_ssd)
+
 if __name__ == '__main__':
     regx_pattern = "[0-9]*ops\/s"
     path = sys.argv[1]
     parsed_avgs = get_avgs(path, regx_pattern)
-    print(parsed_avgs)
+    get_default_fuse_overhead(parsed_avgs) 
 
