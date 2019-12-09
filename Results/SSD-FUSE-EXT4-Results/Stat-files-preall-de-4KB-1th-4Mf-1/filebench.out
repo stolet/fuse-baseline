@@ -1,0 +1,32 @@
+Filebench Version 1.5-alpha3
+0.000: Allocated 5671MB of shared memory
+0.016: Populating and pre-allocating filesets
+2.478: bigfileset populated: 4000000 files, avg. dir. width = 1000, avg. dir. depth = 2.2, 0 leafdirs, 15625.000MB total size
+2.478: Removing bigfileset tree (if exists)
+31.599: Pre-allocating directories in bigfileset tree
+31.767: Pre-allocating files in bigfileset tree
+238.598: Waiting for pre-allocation to finish (in case of a parallel pre-allocation)
+238.598: Population and pre-allocation of filesets completed
+260.066: Attempting to create fileset more than once, ignoring
+260.066: Starting 1 fileopen instances
+261.162: Running...
+271.163: Per-Operation Breakdown
+delete-file          198912ops    19890ops/s   0.0mb/s      0.0ms/op [0.02ms - 153.16ms]
+271.163: IO Summary: 198912 ops 19889.533 ops/s 0/0 rd/wr   0.0mb/s   0.0ms/op
+281.164: Per-Operation Breakdown
+delete-file          175595ops    17558ops/s   0.0mb/s      0.0ms/op [0.02ms - 2869.23ms]
+281.164: IO Summary: 175595 ops 17558.008 ops/s 0/0 rd/wr   0.0mb/s   0.0ms/op
+291.165: Per-Operation Breakdown
+delete-file          181495ops    18148ops/s   0.0mb/s      0.0ms/op [0.02ms - 349.38ms]
+291.165: IO Summary: 181495 ops 18147.970 ops/s 0/0 rd/wr   0.0mb/s   0.0ms/op
+301.166: Per-Operation Breakdown
+delete-file          216954ops    21694ops/s   0.0mb/s      0.0ms/op [0.02ms - 2056.55ms]
+301.166: IO Summary: 216954 ops 21693.649 ops/s 0/0 rd/wr   0.0mb/s   0.0ms/op
+311.167: Per-Operation Breakdown
+delete-file          149046ops    14903ops/s   0.0mb/s      0.1ms/op [0.02ms - 2301.65ms]
+311.167: IO Summary: 149046 ops 14903.250 ops/s 0/0 rd/wr   0.0mb/s   0.0ms/op
+321.168: Run took 60 seconds...
+321.168: Per-Operation Breakdown
+delete-file          234429ops    23441ops/s   0.0mb/s      0.0ms/op [0.02ms - 432.15ms]
+321.168: IO Summary: 234429 ops 23440.593 ops/s 0/0 rd/wr   0.0mb/s   0.0ms/op
+321.168: Shutting down processes

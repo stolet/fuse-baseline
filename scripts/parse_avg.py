@@ -95,7 +95,7 @@ def calculate_overhead(baseline, comparison):
     baseline = baseline
     comparison = comparison
     overhead = baseline / comparison
-    overhead = 1 - overhead
+    overhead = (1 - overhead) * 100
     return overhead
 
 def get_default_fuse_overhead(dataframe):
@@ -106,8 +106,9 @@ def get_default_fuse_overhead(dataframe):
    fuse_ssd = dataframe.loc[dataframe["Type"] == "SSD-FUSE-EXT4-Results"].reset_index(drop=True)
    fuseopts_ssd = dataframe.loc[dataframe["Type"] == "SSD-FUSE-OPTS-EXT4-Results"].reset_index(drop=True)
 
-   #fuse_hdd["Overhead"] = calculate_overhead(ext4_hdd["Avg"], fuse_hdd["Avg"]) 
-   #fuseopts_hdd["Overhead"] = calculate_overhead(ext4_hdd["Avg"], fuseopts_hdd["Avg"])
+   ext4_hdd["Overhead"] = 0
+   fuse_hdd["Overhead"] = calculate_overhead(ext4_hdd["Avg"], fuse_hdd["Avg"]) 
+   fuseopts_hdd["Overhead"] = calculate_overhead(ext4_hdd["Avg"], fuseopts_hdd["Avg"])
    ext4_ssd["Overhead"] = 0 
    fuse_ssd["Overhead"] = calculate_overhead(ext4_ssd["Avg"], fuse_ssd["Avg"])
    fuseopts_ssd["Overhead"] = calculate_overhead(ext4_ssd["Avg"], fuseopts_ssd["Avg"])
@@ -115,8 +116,10 @@ def get_default_fuse_overhead(dataframe):
    new_dataframe = ext4_ssd
    new_dataframe = new_dataframe.append(fuse_ssd, ignore_index=True)
    new_dataframe = new_dataframe.append(fuseopts_ssd, ignore_index=True)
-    
-   return new_dataframe
+   new_dataframe = new_dataframe.append(ext4_hdd, ignore_index=True)
+   new_dataframe = new_dataframe.append(fuse_hdd, ignore_index=True)
+   new_dataframe = new_dataframe.append(fuseopts_hdd, ignore_index=True)
+   return new_dataframe.sort_values(by=["Type", "Workload"])
 
 if __name__ == '__main__':
     regx_pattern = "[0-9]*ops\/s"

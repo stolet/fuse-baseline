@@ -52,15 +52,19 @@ WORKLOAD_DIR="$HOME/fuse-3.7.0/workloads/No-fuse/$TYPE"
 MOUNT_POINT="$HOME/EXT4_FS/"
 COMMON_FOLDER="$HOME/fuse-3.7.0/Results/$TYPE-EXT4-Results"
 
-work_load_types=( sq rd cr preall )
-work_load_ops=( re wr )
+#work_load_types=( sq rd cr preall )
+#work_load_ops=( re wr )
+#io_sizes=( 4KB 32KB 128KB 1024KB )  # I/O sizes
+#threads=( 1 32 )		    # No. of threads
+work_load_types=( preall )
+work_load_ops=( de )
 io_sizes=( 4KB 32KB 128KB 1024KB )  # I/O sizes
-threads=( 1 32 )		    # No. of threads
+threads=( 32 )		    # No. of threads
 count=1 		            # No. of times you are repeating the experiment
 sleeptime=1
 
 #Clean up the output directory
-rm -rf $COMMON_FOLDER/*
+#rm -rf $COMMON_FOLDER/*
 
 : '
 /dev/sdb is the SSD
@@ -85,7 +89,8 @@ do
 		files=( 4M )
 	elif [ "$wlt" == "preall" ]
 	then
-		work_load_ops=( re de )
+		#work_load_ops=( re de )
+		work_load_ops=( de )
 		io_sizes=( 4KB )
 	fi
 	for wlo in "${work_load_ops[@]}"
@@ -107,7 +112,7 @@ do
 					files=( 1 )
 				elif [ $thrd -eq 32 ]
 				then
-					files=( 32 )
+					files=( 1 )
 				fi
 			elif [ "$wlt" == "rd" -a "$wlo" == "re" ]
 			then
@@ -178,7 +183,18 @@ do
 						
                                                 # Create the output folder to copy the stats
 						outputfolder=$COMMON_FOLDER/Stat-files-$wlt-$wlo-$io_size-${thrd}th-${file}f-$runcount/
-						`mkdir -p $outputfolder`
+						if [ -d outputfolder ]
+						then
+							echo "Output Stat-files dir already exists. Deleting and creating new one"
+							rm -rf $outputfolder
+							echo "Removing files"
+							mkdir -p $outputfolder
+							echo "Created new folder"
+						else
+							echo "Output Stat-files dir does not exist. Creating new one"
+							mkdir -p $outputfolder
+							echo "Created new folder"
+						fi
 						
                                                 #copy the stats
 						cp -r filebench.out $outputfolder/
