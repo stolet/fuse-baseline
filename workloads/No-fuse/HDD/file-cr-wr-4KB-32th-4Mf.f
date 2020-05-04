@@ -1,5 +1,5 @@
 set mode quit timeout
-set $dir=/home/puneet/EXT4_FS
+set $dir=/home/matt/EXT4_FS
 #Fixing Combined I/O Amount to 4M files
 set $nfiles=4000000
 set $meandirwidth=1000

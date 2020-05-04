@@ -1,5 +1,5 @@
 set mode quit timeout
-set $dir=/home/puneet/EXT4_FS
+set $dir=/home/matt/EXT4_FS
 #Fixing I/O Amount to 4M files(SSD)
 set $nfiles=4000000
 set $meandirwidth=1000
@@ -17,9 +17,9 @@ define process name=fileopen, instances=1
 create files
 #mounting and unmounting for better stable results
 system "sync"
-system "umount /home/puneet/EXT4_FS/"
+system "umount /home/matt/EXT4_FS/"
 #Change accordingly for HDD(sdc) and SSD(sdb)
-system "mount -t ext4 /dev/sdb /home/puneet/EXT4_FS"
+system "mount -t ext4 /dev/sdb /home/matt/EXT4_FS"
 system "sync"
 system "echo 3 > /proc/sys/vm/drop_caches"
 system "echo started >> cpustats.txt"

@@ -1,5 +1,5 @@
 set mode quit timeout
-set $dir=/home/puneet/EXT4_FS/
+set $dir=/home/matt/EXT4_FS/
 set $nfiles=1250000
 set $meandirwidth=20
 set $nthreads=100
@@ -50,9 +50,9 @@ define process name=webserver,instances=1
 create files
 
 system "sync"
-system "umount /home/puneet/EXT4_FS/"
+system "umount /home/matt/EXT4_FS/"
 #change accordingly for HDD (sdc) and SSD (sdb)
-system "mount -t ext4 /dev/sdb /home/puneet/EXT4_FS"
+system "mount -t ext4 /dev/sdb /home/matt/EXT4_FS"
 
 system "sync"
 system "echo 3 > /proc/sys/vm/drop_caches"

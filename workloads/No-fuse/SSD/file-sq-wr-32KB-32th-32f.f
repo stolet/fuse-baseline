@@ -1,5 +1,5 @@
 set mode quit timeout
-set $dir=/home/puneet/EXT4_FS
+set $dir=/home/matt/EXT4_FS
 set $nfiles=32
 set $meandirwidth=32
 set $nthreads=1

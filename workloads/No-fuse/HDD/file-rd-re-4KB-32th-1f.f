@@ -1,5 +1,5 @@
 set mode quit timeout
-set $dir=/home/puneet/EXT4_FS
+set $dir=/home/matt/EXT4_FS
 set $nfiles=1
 set $nthreads=32
 #Fixing combined I/O amount to be some 1 G (HDD)
@@ -21,14 +21,14 @@ define process name=fileopen, instances=1
 create files
 #mounting and unmounting for better stable results
 system "sync"
-system "umount /home/puneet/EXT4_FS/"
+system "umount /home/matt/EXT4_FS/"
 #change accordingly for HDD(sdc) and SSD(sdd)
-system "mount -t ext4 /dev/sdc /home/puneet/EXT4_FS"
+system "mount -t ext4 /dev/sdc /home/matt/EXT4_FS"
 
 #warm up the cache (RAM)
 system "sync"
 system "echo 3 > /proc/sys/vm/drop_caches"
-system "dd if=/home/puneet/EXT4_FS/bigfileset/00000001/00000001 of=/dev/null bs=4096 count=1048576 &> /dev/null"
+system "dd if=/home/matt/EXT4_FS/bigfileset/00000001/00000001 of=/dev/null bs=4096 count=1048576 &> /dev/null"
 
 system "echo started >> cpustats.txt"
 system "echo started >> diskstats.txt"
